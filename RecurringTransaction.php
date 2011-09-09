@@ -15,7 +15,7 @@ class RecurringTransaction
 	private function setData(array $data)
 	{
 		foreach ($data as $key => $value) {
-			$methodName = $key . ucfirst(strtolower($key));
+			$methodName = 'set' . ucfirst($key);
 			if (method_exists($this, $methodName)) {
 				$this->$methodName($value);
 			}
@@ -73,7 +73,7 @@ class RecurringTransaction
 		foreach ($period as $dateTime) {
 			$tmpTransaction = clone $this->transaction;
 			$tmpTransaction->setDate($dateTime);
-			$toReturn[] = $dateTime;
+			$toReturn[] = $tmpTransaction;
 		}
 		
 		return $toReturn;

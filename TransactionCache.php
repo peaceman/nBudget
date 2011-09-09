@@ -7,29 +7,29 @@ class TransactionCache implements Iterator
     {
         $executionTime = $transaction->getDate()->getTimestamp();
         if (isset($this->transactions[$executionTime])) {
-            if (is_array($this->transaction[$executionTime])) {
+            if (is_array($this->transactions[$executionTime])) {
                 $this->transactions[$executionTime][] = $transaction;
             } else {
                 $tmpTransaction = $this->transactions[$executionTime];
-                $this->transaction[$executionTime] = arry($tmpTransaction, $transaction);
+                $this->transactions[$executionTime] = array($tmpTransaction, $transaction);
             }
         } else {
-            $this->transaction[$executionTime] = $transaction;
+            $this->transactions[$executionTime] = $transaction;
         }
     }
 
     public function sortTransactions()
     {
-        $this->transactions = uksort($this->transactions, function($firstTimestamp, $secondTimestamp) {
-                if ($firstTimestamp === $secondTimestamp) {
-                    return 0;
-                }
+        uksort($this->transactions, function($firstTimestamp, $secondTimestamp) {
+            if ($firstTimestamp === $secondTimestamp) {
+                return 0;
+            }
 
-                if ($firstTimestamp > $secondTimestamp) {
-                    return -1;
-                } else {
-                    return 1;
-                }
+            if ($firstTimestamp < $secondTimestamp) {
+                return -1;
+            } else {
+                return 1;
+            }
         });
     }
 
@@ -41,7 +41,7 @@ class TransactionCache implements Iterator
      */
     public function current()
     {
-        // TODO: Implement current() method.
+        return current($this->transactions);
     }
 
     /**
@@ -52,7 +52,7 @@ class TransactionCache implements Iterator
      */
     public function next()
     {
-        // TODO: Implement next() method.
+        return next($this->transactions);
     }
 
     /**
@@ -64,7 +64,7 @@ class TransactionCache implements Iterator
      */
     public function key()
     {
-        // TODO: Implement key() method.
+        return key($this->transactions);
     }
 
     /**
@@ -76,7 +76,7 @@ class TransactionCache implements Iterator
      */
     public function valid()
     {
-        // TODO: Implement valid() method.
+        return key($this->transactions) !== null;
     }
 
     /**
@@ -87,6 +87,6 @@ class TransactionCache implements Iterator
      */
     public function rewind()
     {
-        // TODO: Implement rewind() method.
+        return reset($this->transactions);
     }
 }
