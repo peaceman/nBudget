@@ -52,7 +52,7 @@ class TransactionCache implements Iterator
      */
     public function next()
     {
-        return next($this->transactions);
+        next($this->transactions);
     }
 
     /**
@@ -87,6 +87,6 @@ class TransactionCache implements Iterator
      */
     public function rewind()
     {
-        return reset($this->transactions);
+        reset($this->transactions);
     }
 }

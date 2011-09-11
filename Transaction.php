@@ -1,7 +1,14 @@
 <?php
 class Transaction
 {
+    /**
+     * @var float
+     */
 	private $value;
+
+    /**
+     * @var DateTime
+     */
 	private $date;
 	private	$sender;
 	private $recipient;

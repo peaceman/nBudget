@@ -11,6 +11,9 @@ class BankAccount
      */
     private $recurringTransactions = array();
 
+    /**
+     * @var TransactionCache
+     */
     private $transactionCache;
 
     private $balanceCache = array();
@@ -55,9 +58,11 @@ class BankAccount
 
             if (is_array($transaction)) {
                 foreach ($transaction as $subTransaction) {
+                    /** @var Transaction $subTransaction */
                     $tmpBalance += $subTransaction->getValue();
                 }
             } else {
+                /** @var Transaction $transaction */
                 $tmpBalance += $transaction->getValue();
             }
         }

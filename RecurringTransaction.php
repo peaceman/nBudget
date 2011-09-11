@@ -1,9 +1,24 @@
 <?php	
 class RecurringTransaction 
 {
+    /**
+     * @var Transaction
+     */
 	private $transaction;
+
+    /**
+     * @var DateTime
+     */
 	private $startDate;
+
+    /**
+     * @var DateTime
+     */
 	private $endDate;
+
+    /**
+     * @var DateInterval
+     */
 	private $interval;
 	
 	public function __construct(array $data = null)
